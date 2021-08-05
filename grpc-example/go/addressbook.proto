@@ -1,0 +1,48 @@
+syntax = "proto3";
+package tutorial;
+
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+
+option go_package = "generate/";
+
+message Person {
+  string name = 1;
+  int32 id = 2;  // Unique ID number for this person.
+  string email = 3;
+
+  enum PhoneType {
+    MOBILE = 0;
+    HOME = 1;
+    WORK = 2;
+  }
+
+  message PhoneNumber {
+    string number = 1;
+    PhoneType type = 2;
+  }
+
+  repeated PhoneNumber phones = 4; // 可重复的，0至n个
+
+  google.protobuf.Timestamp last_updated = 5;
+}
+
+// Our address book file is just one of these.
+message AddressBook {
+  repeated Person people = 1;
+}
+
+service PersonService {
+  // unary
+  rpc AddPerson(Person) returns (Person) {}
+
+  // server side streaming
+  rpc ListPerson(google.protobuf.Empty) returns (stream Person) {}
+/*
+  // client side streaming
+  rpc RecordRoute(stream Point) returns (RouteSummary) {}
+
+  // bidirectional streaming
+  rpc Recommend(stream RecommendationRequest) returns (stream Feature) {}*/
+
+}
