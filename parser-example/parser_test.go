@@ -1,0 +1,53 @@
+package parser_example
+
+import "testing"
+
+func TestRecursiveDescent(t *testing.T) {
+	makeTokens()
+	program()
+}
+
+func makeTokens() {
+	tokens = append(tokens, token{"var", nilLtr})
+	tokens = append(tokens, token{"ident", "x"})
+	tokens = append(tokens, token{",", nilLtr})
+	tokens = append(tokens, token{"ident", "squ"})
+	tokens = append(tokens, token{";", nilLtr})
+	tokens = append(tokens, token{"procedure", nilLtr})
+	tokens = append(tokens, token{"ident", "square"})
+	tokens = append(tokens, token{";", nilLtr})
+	tokens = append(tokens, token{"begin", nilLtr})
+	tokens = append(tokens, token{"ident", "squ"})
+	tokens = append(tokens, token{":=", nilLtr})
+	tokens = append(tokens, token{"ident", "x"})
+	tokens = append(tokens, token{"*", nilLtr})
+	tokens = append(tokens, token{"ident", "x"})
+	tokens = append(tokens, token{"end", nilLtr})
+	tokens = append(tokens, token{";", nilLtr})
+	tokens = append(tokens, token{"begin", nilLtr})
+	tokens = append(tokens, token{"ident", "x"})
+	tokens = append(tokens, token{":=", nilLtr})
+	tokens = append(tokens, token{"number", "1"})
+	tokens = append(tokens, token{";", nilLtr})
+	tokens = append(tokens, token{"while", nilLtr})
+	tokens = append(tokens, token{"ident", "x"})
+	tokens = append(tokens, token{"<=", nilLtr})
+	tokens = append(tokens, token{"number", "10"})
+	tokens = append(tokens, token{"do", nilLtr})
+	tokens = append(tokens, token{"begin", nilLtr})
+	tokens = append(tokens, token{"call", nilLtr})
+	tokens = append(tokens, token{"ident", "square"})
+	tokens = append(tokens, token{";", nilLtr})
+	tokens = append(tokens, token{"!", nilLtr})
+	tokens = append(tokens, token{"ident", "squ"})
+	tokens = append(tokens, token{";", nilLtr})
+	tokens = append(tokens, token{"ident", "x"})
+	tokens = append(tokens, token{":=", nilLtr})
+	tokens = append(tokens, token{"ident", "x"})
+	tokens = append(tokens, token{"+", nilLtr})
+	tokens = append(tokens, token{"number", "1"})
+	tokens = append(tokens, token{"end", nilLtr})
+	tokens = append(tokens, token{"end", nilLtr})
+	tokens = append(tokens, token{".", nilLtr})
+	tokens = append(tokens, token{"$EOF", nilLtr})
+}

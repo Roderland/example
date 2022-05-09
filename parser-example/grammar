@@ -1,0 +1,47 @@
+// 语言PL/0的文法定义:
+	 program = block "." .
+
+	 block =
+		 ["const" ident "=" number {"," ident "=" number} ";"]
+		 ["var" ident {"," ident} ";"]
+		 {"procedure" ident ";" block ";"} statement .
+
+	 statement =
+		 ident ":=" expression
+		 | "call" ident
+		 | "begin" statement {";" statement } "end"
+		 | "if" condition "then" statement
+		 | "while" condition "do" statement
+		 | "!" ident .
+
+	 condition =
+		 "odd" expression
+		 | expression ("="|"#"|"<"|"<="|">"|">=") expression .
+
+	 expression = ["+"|"-"] term {("+"|"-") term} .
+
+	 term = factor {("*"|"/") factor} .
+
+	 factor =
+		 ident
+		 | number
+		 | "(" expression ")" .
+
+
+// 示例程序-输出从1到10的数平方:
+ 	 VAR x, squ;
+
+	 PROCEDURE square;
+	 BEGIN
+	    squ:= x * x
+	 END;
+
+	 BEGIN
+	    x := 1;
+	    WHILE x <= 10 DO
+	    BEGIN
+	 	  CALL square;
+	 	  ! squ;
+	 	  x := x + 1
+	    END
+	 END.
